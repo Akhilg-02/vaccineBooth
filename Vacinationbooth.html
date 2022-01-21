@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Vacination booth</h1>
+
+    Name: <input type="text" id="name">
+
+    <button onclick="register()">Register</button>
+    
+</body>
+</html>
+
+<script>
+    let queue = ["babu","raju","shyam","hari","sheena"];
+    //----------------------------------------Registration
+    function register(){
+        let name = document.getElementById("name").value;
+
+        let message = `${name} your registration is successfull,Please wait for ur turn!`;
+        alert(message);
+
+        queue.push(name);
+
+        //-------------------------------------Wating part
+        let mypromise = new Promise(function(resolve,reject){
+
+            
+            setInterval(function(){// the ame should be checked everytime , then put setInterval**
+            if(queue[0] === name){
+                resolve(`${name} your vaccination is complete`);
+            }
+          },1000);
+        });
+
+        //Here u see res is equal to resolve(content), it is interelated**
+
+        mypromise.then(function(res){
+            alert(res);
+        })
+    }
+    
+    //---------------------------------------getting vaccine
+    function startVaccination(){
+        queue.shift();
+        console.log("queue:",queue); // This should be written first**
+
+        if(queue.length ===0){
+            clearInterval(id);
+        }
+        
+    }
+
+    let id = setInterval(startVaccination,3000);
+
+    //---------------------------------------------------
+</script>
